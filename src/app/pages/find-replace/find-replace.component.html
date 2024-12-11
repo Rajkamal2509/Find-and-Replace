@@ -1,0 +1,67 @@
+<div class="container mt-5 p-4 shadow-lg rounded bg-light">
+    <h2 class="text-center text-primary">🔍 Find and Replace Tool</h2>
+    <form [formGroup]="findReplaceForm" (ngSubmit)="onSubmit()">
+     
+      <div class="form-group mt-3">
+        <label for="text" class="text-secondary">Text Area</label>
+        <textarea
+          id="text"
+          class="form-control border-info"
+          formControlName="text"
+          rows="6"
+          placeholder="Type or paste your text here..."
+          [ngClass]="{ 'is-invalid': findReplaceForm.get('text')?.invalid && findReplaceForm.get('text')?.touched }"
+        ></textarea>
+        <div *ngIf="findReplaceForm.get('text')?.invalid && findReplaceForm.get('text')?.touched" class="text-danger">
+          Please enter some text.
+        </div>
+      </div>
+  
+    
+      <div class="form-group mt-3">
+        <label for="find" class="text-secondary">Find</label>
+        <input
+          id="find"
+          type="text"
+          class="form-control border-warning"
+          formControlName="findWord"
+          placeholder="Enter the word/phrase to find"
+          [ngClass]="{ 'is-invalid': findReplaceForm.get('findWord')?.invalid && findReplaceForm.get('findWord')?.touched }"
+        />
+        <div *ngIf="findReplaceForm.get('findWord')?.invalid && findReplaceForm.get('findWord')?.touched" class="text-danger">
+          Please specify a word or phrase to find.
+        </div>
+      </div>
+  
+
+      <div class="form-group mt-3">
+        <label for="replace" class="text-secondary">Replace</label>
+        <input
+          id="replace"
+          type="text"
+          class="form-control border-success"
+          formControlName="replaceWord"
+          placeholder="Enter the word/phrase to replace with"
+        />
+      </div>
+  
+
+      <div class="d-flex justify-content-evenly text-center mt-4">
+        <button
+          type="submit"
+          class="btn btn-primary px-4"
+          [disabled]="!findReplaceForm.valid"
+        >
+          Replace
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary px-4 ml-2"
+          (click)="onReset()"
+        >
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+  
